@@ -1,0 +1,346 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define DVORAK 0
+#define QWERTY 1
+#define LOWER  2
+#define RAISE  3
+#define BOTH   4
+#define ARROW  5
+#define VIMARR 6
+
+&lt {
+    tapping-term-ms = <150>;
+};
+
+&mt {
+    tapping-term-ms = <150>;
+};
+
+
+//  dvorak
+//  __________________________________    _________________________
+//  | ALT/TAB  |  '  | < | > | P | Y | || | F | G | C | R | L |BSP|
+//  | CTRL/ESC |  A  | O | E | U | I | || | D | H | T | N | S | - |
+//  | SHFT     |WIN/;| Q | J | K | X | || | B | M | W | V | Z |WIN|
+//                       |NUM|LWR|ENT| || |SPC|RSE|ARW|
+//  qwerty
+//  __________________________________    _________________________
+//  | ALT/TAB  | Q | W | E | R | T | | || | Y | U | I | O | P |BSP|
+//  | CTRL/ESC | A | S | D | F | G | | || | H | J | K | L | ; | ' |
+//  | SHFT     | Z | X | C | V | B | | || | N | M | , | . | / |WIN|
+//                       |NUM|LWR|SPC| || |ENT|RSE|ARW|
+//           _________________________ || _________________________
+//  lower    | ` | 1 | 2 | 3 | 4 | 5 | || | 6 | 7 | 8 | 9 | 0 | / |
+//           |   |   | [ | ] |   |BSP| || |DEL|   |   |   | = | - |
+//           |SFT|CTL|WIN|ALT|   |   | || |   |   |   |   |   | \ |
+//                       |   |---|ENT| || |SPC|LY3|   |
+//           _________________________ || _________________________
+//  raise    | ~ | ! | @ | # | $ | % | || | ^ | & | * | ( | ) | ? |
+//           |   |   | [ | ] |   |BSP| || |DEL|   |   |   | + | _ |
+//           |SFT|CTL|WIN|ALT|   |   | || |   |   |   |   |   | | |
+//                       |   |LY3|ENT| || |SPC|---| 0 |
+//           _________________________ || __________________________
+//  both     |F1 |F2 |F3 |F4 |F5 |F6 | || |BTC|BT1|BT2|BT3|BT4|BT5|
+//           |F7 |F8 |F9 |F10|F11|F12| || | 🔇| ⏯ | 🔉| 🔊|   |   |
+//           |SFT|CTL|WIN|ALT|   |   | || |   |   |   |   |   |   |
+//                       |   |---|   | || |   |---|   |
+//           _________________________ || _________________________
+//  arrow    |   |   |PUP| ↑ |PDN|   | || |   |   |   |   |   |   |
+//           |   |HOM| ← | ↓ | → |END| || |   |   |   |   |   |   |
+//           |SFT|CTL|WIN|ALT|   |   | || |   |   |   |   |   |   |
+//                       |   |   |   | || |   |   |---|
+//           _________________________ || _________________________
+//  numpad   |   |   |   |   |   |   | || |NLK| * | 7 | 8 | 9 | + |
+//           |   |   |   |   |   |   | || |   | / | 4 | 5 | 6 | - |
+//           |RED|UND|CUT|CPY|PST|   | || | , | . | 1 | 2 | 3 |ENT|
+//                       |---|   |   | || |   |   | 0 |
+
+/ {
+    behaviors {
+		qc_sq: left_ctrl_sq {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp SQT>, <&kp Q>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_comma: left_ctrl_comma {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp COMMA>, <&kp W>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_dot: left_ctrl_dot {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp DOT>, <&kp E>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_p: left_ctrl_p {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp P>, <&kp R>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_y: left_ctrl_y {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp Y>, <&kp T>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_f: left_ctrl_f {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp F>, <&kp Y>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_g: left_ctrl_g {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp G>, <&kp U>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_c: left_ctrl_c {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp C>, <&kp I>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_r: left_ctrl_r {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp R>, <&kp O>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_l: left_ctrl_l {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp L>, <&kp P>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_a: left_ctrl_a {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp A>, <&kp A>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_o: left_ctrl_o {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp O>, <&kp S>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_e: left_ctrl_e {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp E>, <&kp D>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_u: left_ctrl_u {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp U>, <&kp F>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_i: left_ctrl_i {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp I>, <&kp G>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_d: left_ctrl_d {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp D>, <&kp H>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_h: left_ctrl_h {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp H>, <&kp J>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_t: left_ctrl_t {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp T>, <&kp K>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_n: left_ctrl_n {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp N>, <&kp L>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_s: left_ctrl_s {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp S>, <&kp SEMI>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_minus: left_ctrl_minus {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp MINUS>, <&kp SQT>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_semi: left_ctrl_semi {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&mt LWIN SEMI>, <&mt LWIN Z>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_q: left_ctrl_q {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp Q>, <&kp X>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_j: left_ctrl_j {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp J>, <&kp C>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_k: left_ctrl_k {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp K>, <&kp V>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_x: left_ctrl_x {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp X>, <&kp B>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_b: left_ctrl_b {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp B>, <&kp N>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_m: left_ctrl_m {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp M>, <&kp M>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_w: left_ctrl_w {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp W>, <&kp COMMA>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_v: left_ctrl_v {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp V>, <&kp DOT>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+		qc_z: left_ctrl_z {
+			compatible = "zmk,behavior-mod-morph";
+		    #binding-cells = <0>;
+			bindings = <&kp Z>, <&kp SLASH>;
+		    mods = <(MOD_LCTL)>;
+			keep-mods = <(MOD_LCTL)>;
+		};
+	};
+    keymap {
+        compatible = "zmk,keymap";
+        default_layer {
+            bindings = <
+   &mt LALT TAB   &qc_sq         &qc_comma  &qc_dot     &qc_p      &qc_y        &qc_f      &qc_g      &qc_c      &qc_r       &qc_l         &kp BSPC
+   &mt LCTRL ESC  &qc_a          &qc_o      &qc_e       &qc_u      &qc_i        &qc_d      &qc_h      &qc_t      &qc_n       &qc_s         &kp MINUS
+   &kp LSHFT      &qc_semi       &qc_q      &qc_j       &qc_k      &qc_x        &qc_b      &qc_m      &qc_w      &qc_v       &qc_z         &kp RWIN
+                                            &mo VIMARR  &mo LOWER  &kp ENTER    &kp SPACE  &mo RAISE  &mo ARROW
+            >;
+        };
+        qwerty_layer {
+            bindings = <
+   &mt LALT TAB   &kp Q     &kp W      &kp E       &kp R      &kp T        &kp Y      &kp U      &kp I      &kp O       &kp P         &kp BSPC
+   &mt LCTRL ESC  &kp A     &kp S      &kp D       &kp F      &kp G        &kp H      &kp J      &kp K      &kp L       &kp SEMI      &kp SQT
+   &kp LSHFT      &kp Z     &kp X      &kp C       &kp V      &kp B        &kp N      &kp M      &kp COMMA  &kp DOT     &kp SLASH     &kp RWIN
+                                       &mo VIMARR  &mo LOWER  &kp SPACE    &kp ENTER  &mo RAISE  &mo ARROW
+            >;
+        };
+        lower_layer {
+            bindings = <
+   &kp GRAVE      &kp N1       &kp N2    &kp N3       &kp N4     &kp N5           &kp N6     &kp N7    &kp N8     &kp N9       &kp N0      &kp SLASH
+   &none          &none        &kp LBKT  &kp RBKT     &none      &kp BSPC         &kp DEL    &none     &none      &none        &kp PLUS    &kp MINUS
+   &kp LSHFT    &kp LCTRL      &kp LGUI  &kp LALT     &none      &kp LG(LCTRL)    &none      &none     &none      &none        &none       &kp BACKSLASH
+                                            &none     &trans     &kp ENTER        &kp SPACE  &mo BOTH  &none
+            >;
+        };
+        raise_layer {
+            bindings = <
+   &kp TILDE      &kp EXCL   &kp AT    &kp HASH  &kp DOLLAR  &kp PERCENT  &kp CARET  &kp AMPERSAND  &kp STAR   &kp LPAR  &kp RPAR    &kp QUESTION
+   &none          &none      &kp LBRC  &kp RBRC  &none       &kp BSPC     &kp DEL    &none          &none      &none     &kp EQUAL   &kp UNDERSCORE
+   &kp LSHFT      &kp LCTRL  &kp LGUI  &kp LALT  &none       &none        &none      &none          &none      &none     &none       &kp PIPE
+                                       &none     &mo BOTH    &kp ENTER    &kp SPACE  &trans         &none
+            >;
+        };
+        both_layer {
+            bindings = <
+   &kp F1     &kp F2      &kp F3    &kp F4    &kp F5   &kp F6        &none        &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2  &bt BT_SEL 3  &bt BT_SEL 4
+   &kp F7     &kp F8      &kp F9    &kp F10   &kp F11  &kp F12       &kp C_MUTE   &kp C_PP      &kp C_VOL_DN  &kp C_VOL_UP  &none         &bt BT_CLR  
+   &kp LSHFT  &kp LCTRL   &kp LGUI  &kp LALT  &none    &none         &none        &none         &none         &none         &none         &tog QWERTY
+                                    &none     &trans   &none         &none        &trans        &none                       
+            >;
+        };
+        arrow_layer {
+            bindings = <
+   &kp LALT         &none          &kp PGUP       &kp UP      &kp PGDN    &kp LC(LG(LS(N4)))    &kp HOME  &kp PGDN  &kp PGUP  &kp END    &trans    &trans
+   &kp LCTRL        &kp HOME       &kp LEFT       &kp DOWN    &kp RIGHT   &kp END               &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans    &trans
+   &kp LSHFT        &kp LGUI       &none          &none       &none       &kp PRINTSCREEN       &trans    &trans    &trans    &trans     &trans    &trans
+                                                  &none       &mo 3       &kp ENTER             &trans    &trans    &none
+            >;
+        };
+        vim_arrow_layer {
+            bindings = <
+   &trans     &kp LC(LG(LA(Q)))     &kp LC(LG(LA(W)))    &kp LC(LG(LA(E)))     &kp LC(LG(LA(R)))      &kp LC(LG(LA(T)))    &kp HOME  &kp PGDN  &kp PGUP  &kp END    &trans    &trans
+   &trans     &kp LC(LG(LA(A)))     &kp LC(LG(LA(S)))    &kp LC(LG(LA(D)))     &kp LC(LG(LA(F)))      &kp LC(LG(LA(G)))    &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT  &trans    &trans
+   &kp LC(Y)  &kp LC(LG(LA(Z)))     &kp LC(LG(LA(X)))    &kp LC(LG(LA(C)))     &kp LC(LG(LA(V)))      &kp LC(LG(LA(B)))    &trans    &trans    &trans    &trans     &trans    &trans
+                                                         &trans                &trans                 &trans               &trans    &trans    &trans
+            >;
+        };
+    };
+};
+
